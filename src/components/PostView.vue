@@ -12,7 +12,7 @@
           <label for="username" class="mdl-textfield__label">Describe me</label>
         </div>
         <div class="actions">
-          <a @click.prevent="postCat" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+          <a @click.prevent="postCat(catUrl, title)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
             POST A CAT
           </a>
         </div>
@@ -23,8 +23,10 @@
 
 <script>
 import parse from 'xml-parser'
+import postCat from '../mixins/postCat'
 
 export default {
+  mixins: [postCat],
   data () {
     return {
       'catUrl': null
@@ -34,18 +36,6 @@ export default {
     this.$http.get('https://thecatapi.com/api/images/get?format=xml&results_per_page=1').then(response => {
       this.catUrl = parse(response.body).root.children['0'].children['0'].children['0'].children['0'].content
     })
-  },
-  methods: {
-    postCat () {
-      this.$root.$firebaseRefs.cat.push(
-        {
-          'url': this.catUrl,
-          'comment': this.title,
-          'info': 'Posted by Lambok on Thursday',
-          'created_at': -1 * new Date().getTime()
-        })
-        .then(this.$router.push('/'))
-    }
   }
 }
 </script>

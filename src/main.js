@@ -5,7 +5,10 @@ import Vuefire from 'vuefire'
 import VueResource from 'vue-resource'
 import App from './App'
 import router from './router'
-import firebase from './service/firebase'
+import { database } from '@/service/firebase'
+
+Vue.use(Vuefire)
+Vue.use(VueResource)
 
 Vue.config.productionTip = false
 
@@ -13,12 +16,9 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   firebase: {
-    cat: firebase.database.ref('cat')
+    cat: database.ref('cat').orderByChild('created_at')
   },
   router,
   template: '<App/>',
   components: { App }
 })
-
-Vue.use(Vuefire)
-Vue.use(VueResource)
