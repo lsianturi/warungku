@@ -1,6 +1,6 @@
-# cropchat
+# Warungku - sebuah shoping cart menggunakan Vue
 
-> A cat pictures messaging app
+> Belajar membuat aplikasi shoping cart berbasi PWA dengan Vue.js
 
 ## Build Setup
 
