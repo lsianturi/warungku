@@ -111,6 +111,10 @@ const webpackConfig = merge(baseWebpackConfig, {
       stripPrefix: 'dist/',
       runtimeCaching: [
         {
+          urlPattern: /^https:\/\/firebasestorage\.googleapis\.com\/v0\/b\/cropchat-b05ba\.appspot\.com\/o\//,
+          handler: 'cacheFirst'
+        },
+        {
           urlPattern: /^https:\/\/thecatapi\.com\/api\/images\/get\.php\?id/,
           handler: 'cacheFirst'
         },

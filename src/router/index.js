@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomeView from '@/components/HomeView'
-import DetailView from '@/components/DetailView'
-import PostView from '@/components/PostView'
-import CameraView from '@/components/CameraView'
+import ProductView from '@/components/ProductView'
+import LoginView from '@/components/LoginView'
 
 Vue.use(Router)
 
@@ -12,22 +10,22 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: ProductView
     },
     {
-      path: '/detail/:id',
-      name: 'detail',
-      component: DetailView
+      path: '/product',
+      name: 'product',
+      component: ProductView
     },
     {
-      path: '/post',
-      name: 'post',
-      component: PostView
+      path: '/pesanan',
+      name: 'pesanan',
+      component: ProductView
     },
     {
-      path: '/camera',
-      name: 'camera',
-      component: CameraView
+      path: '/login',
+      name: 'login',
+      component: LoginView
     }
   ]
 })

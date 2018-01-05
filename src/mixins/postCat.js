@@ -1,10 +1,10 @@
 const postCat = {
   methods: {
-    postCat (catUrl, title) {
+    postCat (catUrl, comment) {
       this.$root.$firebaseRefs.cat.push(
         {
           'url': catUrl,
-          'comment': title,
+          'comment': comment,
           'info': 'Posted by Lambok on Tuesday',
           'created_at': -1 * new Date().getTime()
         }
