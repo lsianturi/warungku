@@ -1,12 +1,12 @@
 <template>
   <div class="card text-xs-center">
     <div class="mdl-card__media image-card__picture">
-        <img :src="prd.ImagePath">
+        <img :src="product.image_path">
     </div>
     <div class="mdl-card__title">
-      <h2 class="mdl-card__title-text">{{ product.Name }}<br>{{ product.Detail }}</h2>
+      <h2 class="mdl-card__title-text">{{ product.name }}<br>{{ product.detail }}</h2>
     </div>
-    <div class="mdl-card__supporting-text">IDR {{ formatPrice(product.Price) }}</div>
+    <div class="mdl-card__supporting-text">IDR {{ formatPrice(product.price) }} Stock: {{ product.Inventory }}</div>
     <div class="mdl-card__actions mdl-card--border">
       <add-to-cart :product="product"></add-to-cart>
     </div>
@@ -29,3 +29,19 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .mdl-card__media {
+    background-color: white;
+    align-self: center;
+  }
+  .image-card {
+    position: relative;
+    margin-bottom: 8px;
+    max-width: 960px;
+    margin: auto;
+  }
+  .image-card__picture > img {
+    width:80%;
+  }
+
+</style>

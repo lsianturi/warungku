@@ -2,7 +2,7 @@
   <div>
     <h3 class="title">Daftar Produk</h3>
     <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--6dp" v-for="product in this.products">
+      <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--6dp" v-for="product in this.prds">
         <product :product="product" track-by="id">
         </product>
       </div>
@@ -16,7 +16,7 @@ import { mapActions, mapState } from 'vuex'
 
 export default {
   computed: mapState({
-    products: this.getProducts()
+    prds: state => state.products.all
   }),
   methods: mapActions([
     'getProducts'
@@ -27,3 +27,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .mdl-grid {
+    margin-top: 3em;
+  }
+</style>

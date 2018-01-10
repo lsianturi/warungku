@@ -1,8 +1,5 @@
 const state = {
-  added: [],
-  productDiscount: false,
-  totalDiscount: false,
-  freeShipping: false
+  added: []
 }
 
 const mutations = {

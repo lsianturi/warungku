@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 import * as actions from './shop/actions'
 import * as getters from './shop/getters'
 import products from './shop/modules/products'
