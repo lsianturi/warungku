@@ -1,61 +1,65 @@
 <template>
-  <div class="LoginView">
-    <login-component
-      passwordPattern=".{4,10}"
-      passwordMessage="Password length must be 4 to 10 characters long."
-      @loginCredentials="loginAttempt"
-      :errorMessage="errorMessage"
-    ></login-component>
+  <div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-card mdl-shadow--4dp my-login-card-size">
+      <form @submit.prevent="login({email, password})">
+        <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+          <h2 class="mdl-card__title-text">Login</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input ref="txtEmail" placeholder="GSK user name" class="mdl-textfield__input" type="text" id="email" v-model="email">
+            <label class="mdl-textfield__label" for="email">Username:</label>
+            <span class="mdl-textfield__error">Please insert your computer login name.</span>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input ref="txtPassword" placeholder="Password" class="mdl-textfield__input" type="password"
+                   id="password" v-model="password">
+            <label class="mdl-textfield__label" for="password">Password:</label>
+          </div>
+
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            <span v-if="isLoading">Loading...</span>
+            <span v-else>Sign In</span>
+          </button>
+
+          <span v-if="this.error" class="mdl-color-text--red-500"><strong>{{ this.error }}</strong></span>
+        </div>
+      </form>
+    </div> <!-- End mdl-card -->
+    <div class="mdl-layout-spacer"></div>
   </div>
 </template>
 
 <script>
-import LoginComponent from './LoginComponent'
-import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'LoginView',
-  components: {
-    'login-component': LoginComponent
-  },
+  name: 'login-view',
   data () {
     return {
-      errorMessage: ''
+      isLoading: false
     }
   },
-  methods: {
-    loginAttempt: function (credentials) {
-      console.log('Email is: ' + credentials.email)
-      console.log('Password is: ' + credentials.password)
-      var url = 'http://svc.gunungsewu.com/ldap/ldapgw.php?txtpassword=' + credentials.password + '&txtemail=' + credentials.email + '&app=eksis'
-      console.log('Url: ' + url)
-
-      axios.get(url)
-        .then(response => {
-          console.log('resp: ', response)
-          if (response.status === 200) {
-            console.log('resp: ', response.data)
-            if (response.data.status === 'true') {
-              this.$store.user = response.data
-              this.$store.state.isLoggedIn = true
-              window.localStorage.setItem('lbUser', JSON.stringify(this.user))
-              this.$router.push('/product')
-            } else {
-              this.errorMessage = 'Wrong password or username'
-            }
-          }
-        })
-        .catch(error => {
-          console.log(error)
-          this.errorMessage = error.errorMessage
-        })
-      this.errorMessage = ''
-    }
-  }
+  computed: mapGetters([
+    'isLoggedIn'
+  ]),
+  created () {
+  },
+  updated () {
+  },
+  methods: mapActions([
+    'login',
+    'logout'
+  ])
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .my-login-card-size {
+    max-width: 320px;
+    height: auto;
+  }
 </style>

@@ -3,9 +3,6 @@ const state = {
 }
 
 const mutations = {
-  RECEIVE_PROFILE (state, profile) {
-    state.data = profile
-  },
   ADD_TO_CART (state, productId) {
     const record = state.added.find(product => product.id === productId)
 

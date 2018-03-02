@@ -12,11 +12,9 @@
 
     <div class="mt-1 text-xs-center">
       <button class="btn btn-success"
-        :disabled="orderOnLimit"
         @click="buy">
         Checkout
       </button>
-      <p v-if="orderOnLimit">Order is over limit.</p>
     </div>
   </div>
 </template>
@@ -28,8 +26,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters({
-    items: 'cartProducts',
-    orderOnLimit: 'orderOnLimit'
+    items: 'cartProducts'
   }),
   components: {
     ShoppingCartItem,
@@ -37,7 +34,7 @@ export default {
   },
   methods: {
     buy () {
-      window.alert('You bought :)')
+      window.alert('You bought :')
       window.location.reload()
     }
   }

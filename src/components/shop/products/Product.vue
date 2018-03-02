@@ -1,12 +1,12 @@
 <template>
   <div class="card text-xs-center">
     <div class="mdl-card__media image-card__picture">
-        <img :src="product.image_path">
+        <img :src="getImageUrl(product.image_path)">
     </div>
     <div class="mdl-card__title">
       <h2 class="mdl-card__title-text">{{ product.name }}<br>{{ product.detail }}</h2>
     </div>
-    <div class="mdl-card__supporting-text">IDR {{ formatPrice(product.price) }} Stock: {{ product.Inventory }}</div>
+    <div class="mdl-card__supporting-text">{{product.id}} - IDR {{ formatPrice(product.price) }} Stock: {{ product.inventory }}</div>
     <div class="mdl-card__actions mdl-card--border">
       <add-to-cart :product="product"></add-to-cart>
     </div>
@@ -25,6 +25,9 @@ export default {
     formatPrice (value) {
       let val = (value / 1).toFixed(0).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    },
+    getImageUrl (image) {
+      return 'http://localhost:3000/api/v1' + image
     }
   }
 }

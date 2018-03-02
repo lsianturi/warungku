@@ -2,7 +2,7 @@
   <div>
     <h3 class="title">Daftar Produk</h3>
     <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--6dp" v-for="product in this.prds">
+      <div v-bind:key="product.id" class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--6dp" v-for="product in products.all">
         <product :product="product" track-by="id">
         </product>
       </div>
@@ -15,15 +15,20 @@ import Product from './Product'
 import { mapActions, mapState } from 'vuex'
 
 export default {
-  computed: mapState({
-    prds: state => state.products.all
-  }),
+  name: 'ProductList',
+  computed: {
+    ...mapState({
+      products: state => state.products
+    })
+  },
+  created () {
+    this.getProducts()
+  },
   methods: mapActions([
     'getProducts'
   ]),
-  components: { Product },
-  created () {
-    this.getProducts()
+  components: {
+    Product
   }
 }
 </script>
